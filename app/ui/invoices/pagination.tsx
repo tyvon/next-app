@@ -62,11 +62,11 @@ export default function Pagination({totalPages}: { totalPages: number }) {
 }
 
 function PaginationNumber({
-                              page,
-                              href,
-                              isActive,
-                              position,
-                          }: {
+    page,
+    href,
+    isActive,
+    position,
+}: {
     page: number | string;
     href: string;
     position?: 'first' | 'last' | 'middle' | 'single';

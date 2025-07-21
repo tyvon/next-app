@@ -19,8 +19,7 @@ export async function fetchRevenue() {
         console.log('Fetching revenue data...');
         await new Promise((resolve) => setTimeout(resolve, 3000));
 
-        const data = await sql<Revenue[]>`SELECT *
-                                          FROM revenue`;
+        const data = await sql<Revenue[]>`SELECT * FROM revenue`;
 
         console.log('Data fetch completed after 3 seconds.');
 
@@ -129,17 +128,17 @@ export async function fetchFilteredInvoices(
 export async function fetchInvoicesPages(query: string) {
     try {
         const data = await sql`SELECT COUNT(*)
-                               FROM invoices
-                                        JOIN customers ON invoices.customer_id = customers.id
-                               WHERE customers.name ILIKE ${`%${query}%`}
-                                  OR
-                                   customers.email ILIKE ${`%${query}%`}
-                                  OR
-                                   invoices.amount::text ILIKE ${`%${query}%`}
-                                  OR
-                                   invoices.date::text ILIKE ${`%${query}%`}
-                                  OR
-                                   invoices.status ILIKE ${`%${query}%`}
+            FROM invoices
+                JOIN customers ON invoices.customer_id = customers.id
+            WHERE customers.name ILIKE ${`%${query}%`}
+              OR
+               customers.email ILIKE ${`%${query}%`}
+              OR
+               invoices.amount::text ILIKE ${`%${query}%`}
+              OR
+               invoices.date::text ILIKE ${`%${query}%`}
+              OR
+               invoices.status ILIKE ${`%${query}%`}
         `;
 
         const totalPages = Math.ceil(Number(data[0].count) / ITEMS_PER_PAGE);
@@ -177,8 +176,7 @@ export async function fetchInvoiceById(id: string) {
 export async function fetchCustomers() {
     try {
         const customers = await sql<CustomerField[]>`
-            SELECT id,
-                   name
+            SELECT id, name
             FROM customers
             ORDER BY name ASC
         `;
